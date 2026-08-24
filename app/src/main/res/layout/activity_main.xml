@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp"
+    android:background="?attr/colorSurface">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🤖"
+        android:textSize="64sp"
+        android:gravity="center"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="?attr/colorOnSurface"
+        android:gravity="center"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="100% Offline · Private · On-Device"
+        android:textSize="13sp"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:gravity="center"
+        android:layout_marginBottom="48dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEmergency"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="🆘  Emergency Knowledge"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        app:cornerRadius="16dp"
+        app:backgroundTint="@color/emergency_red" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPdf"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="📚  PDF Reader"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"
+        app:cornerRadius="16dp"
+        app:backgroundTint="@color/pdf_blue" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnChat"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="💬  General Chat"
+        android:textSize="16sp"
+        app:cornerRadius="16dp"
+        app:backgroundTint="@color/chat_green" />
+
+</LinearLayout>

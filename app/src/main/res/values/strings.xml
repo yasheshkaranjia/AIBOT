@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">AI Assistant</string>
+    <string name="hint_message">Type a message…</string>
+    <string name="send">Send</string>
+    <string name="status_online">● Online</string>
+    <string name="status_offline">● Offline — start backend in Termux</string>
+    <string name="status_checking">● Checking…</string>
 </resources>

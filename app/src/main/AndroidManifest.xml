@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Required for calling the Python backend -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Ready for voice input when we add it -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -15,14 +18,21 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
 
+        <!-- Mode selector — opens first when the app launches -->
         <activity
-            android:name=".ChatActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Chat screen — opened from MainActivity with a mode extra -->
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
 
