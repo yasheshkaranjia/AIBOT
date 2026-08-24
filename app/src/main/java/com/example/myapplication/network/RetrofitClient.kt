@@ -6,6 +6,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+/**
+ * Singleton object that provides and configures the Retrofit instance.
+ * It handles the base URL, logging, and timeout configurations for the network client.
+ */
 object RetrofitClient {
 
     // localhost because the Python backend runs in Termux on the SAME phone.
@@ -13,10 +17,12 @@ object RetrofitClient {
     // replace with your phone's local IP e.g. "http://192.168.1.x:8000/"
     private const val BASE_URL = "http://localhost:8000/"
 
+    /** Logger to inspect HTTP requests and responses in Logcat. */
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY   // shows full request/response in Logcat
     }
 
+    /** The OkHttpClient configured with specific timeouts for AI processing. */
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .connectTimeout(10, TimeUnit.SECONDS)   // give up connecting after 10 s
@@ -24,6 +30,7 @@ object RetrofitClient {
         .writeTimeout(30, TimeUnit.SECONDS)
         .build()
 
+    /** The shared [ApiService] instance created lazily. */
     val api: ApiService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)

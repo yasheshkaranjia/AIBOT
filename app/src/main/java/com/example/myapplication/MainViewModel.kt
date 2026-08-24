@@ -12,6 +12,14 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 /** Everything the UI needs, collected in one place. */
+/**
+ * Represents the state of the Chat UI.
+ *
+ * @property messages List of chat messages to display.
+ * @property isLoading Indicates if a response is being fetched from the backend.
+ * @property errorMessage Error message to display to the user, if any.
+ * @property backendOnline Status of the backend connectivity (true=online, false=offline, null=checking).
+ */
 data class ChatUiState(
     val messages: List<ChatMessage> = emptyList(),
     val isLoading: Boolean = false,
@@ -19,19 +27,28 @@ data class ChatUiState(
     val backendOnline: Boolean? = null  // null = not yet checked
 )
 
+/**
+ * ViewModel for managing chat logic and state.
+ * It coordinates interaction between the UI and the networking layer.
+ */
 class MainViewModel : ViewModel() {
 
     private val _uiState = MutableStateFlow(ChatUiState())
+    /** The observable UI state. */
     val uiState: StateFlow<ChatUiState> = _uiState.asStateFlow()
 
-    // The mode is set once when the activity opens (chat / emergency / pdf).
+    /** The current operational mode of the chat (e.g., "chat", "emergency", "pdf"). */
     var currentMode: String = "chat"
 
     init {
+        // Automatically check backend health on initialization
         checkBackendHealth()
     }
 
-    /** Ping /health so the UI can show "backend offline" early. */
+    /**
+     * Checks if the backend API is reachable by pinging the /health endpoint.
+     * Updates the UI state with the backend status.
+     */
     private fun checkBackendHealth() {
         viewModelScope.launch {
             try {
@@ -43,8 +60,13 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Sends a message to the backend and updates the UI state with the response.
+     *
+     * @param text The message text to send.
+     */
     fun sendMessage(text: String) {
-        // Add the user's message to the list immediately
+        // Add the user's message to the list immediately for instant feedback
         val userMsg = ChatMessage(text.trim(), isFromUser = true)
         _uiState.update { state ->
             state.copy(
@@ -56,10 +78,12 @@ class MainViewModel : ViewModel() {
 
         viewModelScope.launch {
             try {
+                // Call the API
                 val response = RetrofitClient.api.chat(
                     ChatRequest(message = text.trim(), mode = currentMode)
                 )
 
+                // Handle the response
                 val aiMsg = if (response.success) {
                     ChatMessage(response.response, isFromUser = false)
                 } else {
@@ -73,6 +97,7 @@ class MainViewModel : ViewModel() {
                     )
                 }
             } catch (e: Exception) {
+                // Handle network errors or server unavailability
                 val hint = if (e.message?.contains("refused") == true)
                     "Make sure the Python backend is running in Termux."
                 else e.message ?: "Unknown error"
@@ -87,7 +112,10 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    /** Called after the error snackbar has been shown so it doesn't repeat. */
+    /**
+     * Resets the error message in the UI state.
+     * Should be called after the error has been successfully displayed to the user.
+     */
     fun errorShown() {
         _uiState.update { it.copy(errorMessage = null) }
     }

@@ -1,16 +1,15 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
 }
 
 android {
     namespace = "com.example.myapplication"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.example.myapplication"
         minSdk = 26          // was 32 — now supports Android 8+ (covers 95%+ of devices)
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -19,6 +18,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true   // enables R8 shrinking for smaller APK
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -27,12 +27,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = "11"
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 

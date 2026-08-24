@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Chat interface layout.
+    Features a backend status bar, a scrollable list of messages, a progress indicator,
+    and a message input area with a send button.
+-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -6,7 +11,7 @@
     android:orientation="vertical"
     android:background="?attr/colorSurface">
 
-    <!-- Backend status bar -->
+    <!-- Backend status bar: Indicates if the Python backend is Online, Offline, or being checked -->
     <TextView
         android:id="@+id/statusText"
         android:layout_width="match_parent"
@@ -17,7 +22,7 @@
         android:padding="4dp"
         android:background="?attr/colorSurfaceVariant" />
 
-    <!-- Message list — takes all remaining vertical space -->
+    <!-- Message list: Displays the conversation. Occupies all remaining space. -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewChat"
         android:layout_width="match_parent"
@@ -26,7 +31,7 @@
         android:padding="8dp"
         android:clipToPadding="false" />
 
-    <!-- Spinner shown while AI is responding -->
+    <!-- Spinner: Visible only when the AI is processing a request -->
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
@@ -34,7 +39,7 @@
         android:layout_gravity="center_horizontal"
         android:visibility="gone" />
 
-    <!-- Input row -->
+    <!-- Input row: Contains the text field and the send button -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,6 +48,7 @@
         android:background="?attr/colorSurfaceVariant"
         android:gravity="center_vertical">
 
+        <!-- Message input field -->
         <EditText
             android:id="@+id/editMessage"
             android:layout_width="0dp"
@@ -56,6 +62,7 @@
             android:textColor="?attr/colorOnSurface"
             android:textColorHint="?attr/colorOnSurfaceVariant" />
 
+        <!-- Send message button -->
         <ImageButton
             android:id="@+id/buttonSend"
             android:layout_width="48dp"

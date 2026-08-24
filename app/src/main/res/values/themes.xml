@@ -12,5 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="colorSurfaceVariant">@color/surface_variant_light</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant_light</item>
     </style>
 </resources>

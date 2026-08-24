@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Dashboard Layout for the application.
+    Displays a series of buttons to launch the chat activity in different modes.
+-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,6 +13,7 @@
     android:padding="32dp"
     android:background="?attr/colorSurface">
 
+    <!-- App Icon/Logo placeholder -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,6 +22,7 @@
         android:gravity="center"
         android:layout_marginBottom="8dp" />
 
+    <!-- App Title -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +33,7 @@
         android:gravity="center"
         android:layout_marginBottom="8dp" />
 
+    <!-- Privacy/Features subtitle -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,6 +43,7 @@
         android:gravity="center"
         android:layout_marginBottom="48dp" />
 
+    <!-- Button to launch Emergency Knowledge mode -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEmergency"
         android:layout_width="match_parent"
@@ -46,6 +54,7 @@
         app:cornerRadius="16dp"
         app:backgroundTint="@color/emergency_red" />
 
+    <!-- Button to launch PDF Reader mode -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnPdf"
         android:layout_width="match_parent"
@@ -56,6 +65,7 @@
         app:cornerRadius="16dp"
         app:backgroundTint="@color/pdf_blue" />
 
+    <!-- Button to launch General Chat mode -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnChat"
         android:layout_width="match_parent"
